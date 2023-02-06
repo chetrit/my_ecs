@@ -9,7 +9,7 @@
 #define MOVABLE_HPP_
 
 namespace ecs {
-struct movable_t {
+struct controllable_t {
     bool up;
     bool left;
     bool down;
