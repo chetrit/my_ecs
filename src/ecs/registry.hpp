@@ -61,7 +61,7 @@ class registry_t {
      */
     void kill_entity(entity_t const &entity) {
         _killed_entities.push_back(entity);
-        for (auto &_erase_component_func : _erase_component_funcs) {
+        for (auto _erase_component_func : _erase_component_funcs) {
             _erase_component_func(entity, *this);
         }
     };
@@ -87,7 +87,10 @@ class registry_t {
      */
     template <typename Component>
     void remove_component(entity_t const &from) {
-        get_components<Component>().erase(from);
+        sparse_array<Component> &components = get_components<Component>();
+        if (from < components.size() && components[from]) {
+            components.erase(from);
+        }
     };
 
     template <class... Components, typename Callable>
