@@ -12,6 +12,7 @@
 
 namespace ecs {
 class human_t {
+  public:
     human_t(size_t const &id_) : id(id_){};
     // ~human_t() = default;
 
