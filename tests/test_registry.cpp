@@ -11,9 +11,23 @@
 
 #include "doctest.h"
 
-#include "registry.hpp"
 #include "position.hpp"
+#include "registry.hpp"
 #include "velocity.hpp"
+
+TEST_CASE("registry register components at once") {
+    ecs::registry_t registry;
+    registry.register_components<ecs::pos_t, ecs::velocity_t>();
+
+    ecs::entity_t ent1 = registry.spawn_entity();
+    registry.emplace_component<ecs::pos_t>(ent1, 2, 2);
+    registry.emplace_component<ecs::velocity_t>(ent1, 3, 2);
+
+    ecs::sparse_array<ecs::pos_t> p = registry.get_components<ecs::pos_t>();
+    ecs::sparse_array<ecs::velocity_t> v = registry.get_components<ecs::velocity_t>();
+    CHECK(p[ent1]->x == 2);
+    CHECK(v[ent1]->vx == 3);
+}
 
 TEST_CASE("registry manipulate components") {
     ecs::registry_t registry;

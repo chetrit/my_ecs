@@ -33,6 +33,7 @@ class position_t {
 
 #ifdef SFML_PLUGIN
     operator sf::Vector2f() { return {x, y}; }
+
     operator sf::Vector2f() const { return {x, y}; }
 #endif
 

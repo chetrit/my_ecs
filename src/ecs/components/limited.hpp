@@ -30,7 +30,9 @@ class limited_t {
         return *this;
     };
 
-    inline bool contains(int32_t x, int32_t y) const { return (x >= left && x <= width && y >= top && y <= height); }
+    inline bool contains(int32_t x, int32_t y) const {
+        return (x >= left && x <= width && y >= top && y <= height);
+    }
 
     inline bool intersects(limited_t const &limited) const {
         int x1 = std::max(left, limited.left);
@@ -42,8 +44,9 @@ class limited_t {
     }
 
     friend inline std::ostream &operator<<(std::ostream &stream, limited_t const &limited) {
-        stream << "(" << static_cast<int>(limited.left) << "," << static_cast<int>(limited.top) << ","
-               << static_cast<int>(limited.width) << "," << static_cast<int>(limited.height) << ")";
+        stream << "(" << static_cast<int>(limited.left) << "," << static_cast<int>(limited.top)
+               << "," << static_cast<int>(limited.width) << "," << static_cast<int>(limited.height)
+               << ")";
         return stream;
     }
 

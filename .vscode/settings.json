@@ -1,6 +1,14 @@
 {
   "files.associations": {
     "ios": "cpp",
-    "stack": "cpp"
+    "stack": "cpp",
+    "vector": "cpp",
+    "optional": "cpp",
+    "any": "cpp",
+    "type_traits": "cpp",
+    "exception": "cpp",
+    "unordered_map": "cpp",
+    "typeindex": "cpp",
+    "mutex": "cpp"
   }
 }

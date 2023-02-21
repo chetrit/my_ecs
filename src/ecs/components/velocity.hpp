@@ -20,7 +20,8 @@ class velocity_t {
 #ifdef SFML_PLUGIN
     velocity_t(sf::Vector2i const &v) : vx(v.x), vy(v.y){};
 #endif
-    velocity_t(int32_t const &vx_ = 0, int32_t const &vy_ = 0) : vx(vx_), vy(vy_){};
+    velocity_t(int32_t const &vx_ = 0, int32_t const &vy_ = 0)
+        : vx(vx_), vy(vy_){};
 
     velocity_t(velocity_t const &velocity) : vx(velocity.vx), vy(velocity.vy){};
 
@@ -38,8 +39,10 @@ class velocity_t {
     int32_t vy;
 };
 
-inline std::ostream &operator<<(std::ostream &stream, velocity_t const &velocity) {
-    stream << "(" << static_cast<int>(velocity.vx) << "," << static_cast<int>(velocity.vy) << ")";
+inline std::ostream &operator<<(std::ostream &stream,
+                                velocity_t const &velocity) {
+    stream << "(" << static_cast<int>(velocity.vx) << ","
+           << static_cast<int>(velocity.vy) << ")";
     return stream;
 }
 }  // namespace ecs

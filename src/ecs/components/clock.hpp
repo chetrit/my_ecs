@@ -5,6 +5,7 @@
 ** clock
 */
 
+#ifdef SFML_PLUGIN
 #ifndef CLOCK_HPP_
 #define CLOCK_HPP_
 
@@ -38,3 +39,4 @@ class clock_t {
 }  // namespace ecs
 
 #endif /* !CLOCK_HPP_ */
+#endif

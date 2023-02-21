@@ -60,6 +60,7 @@ class sparse_array {
         _data = arr._data;
         return *this;
     };
+
     /**
      * @brief Overload the assignement operator by move
      *
@@ -78,6 +79,7 @@ class sparse_array {
      * @return reference_type
      */
     reference_type operator[](size_t idx) { return _data[idx]; };
+
     /**
      * @brief Overload the [] operator
      *
@@ -85,6 +87,7 @@ class sparse_array {
      * @return const reference_type
      */
     const_reference_type operator[](size_t idx) const { return _data.at(idx); };
+
     /**
      * @brief Returns a read/write iterator that points to the first
      * element in the array. Iteration is done in ordinary
@@ -93,6 +96,7 @@ class sparse_array {
      * @return iterator
      */
     iterator begin() { return _data.begin(); };
+
     /**
      * @brief Returns a read/write iterator that points to the first
      * element in the array. Iteration is done in ordinary
@@ -101,6 +105,7 @@ class sparse_array {
      * @return const_iterator
      */
     const_iterator begin() const { return _data.begin(); };
+
     /**
      * @brief Returns a read-only (constant) iterator that points to the
      * first element in the array. Iteration is done in ordinary
@@ -109,6 +114,7 @@ class sparse_array {
      * @return const_iterator
      */
     const_iterator cbegin() const { return _data.cbegin(); };
+
     /**
      * @brief Returns a read/write iterator that points one past the last
      * element in the array. Iteration is done in ordinary
@@ -117,6 +123,7 @@ class sparse_array {
      * @return iterator
      */
     iterator end() { return _data.end(); };
+
     /**
      * @brief Returns a read/write iterator that points one past the last
      * element in the array. Iteration is done in ordinary
@@ -124,6 +131,7 @@ class sparse_array {
      * @return const_iterator
      */
     const_iterator end() const { return _data.end(); };
+
     /**
      * @brief Returns a read-only (constant) iterator that points one past
      * the last element in the array. Iteration is done in
@@ -132,12 +140,14 @@ class sparse_array {
      * @return const_iterator
      */
     const_iterator cend() const { return _data.cend(); };
+
     /**
      * @brief Returns the number of elements in the array
      *
      * @return size_type
      */
     size_type size() const { return _data.size(); };
+
     /**
      * @brief Insert a copy component at the given position in the array, and
      * resize the array if needed
@@ -153,6 +163,7 @@ class sparse_array {
         _data[pos] = std::make_optional(component);
         return _data[pos];
     };
+
     /**
      * @brief Insert a move component at the given position in the array, and
      * resize the array if needed
@@ -168,6 +179,7 @@ class sparse_array {
         _data[pos] = std::move(component_ref);
         return _data[pos];
     }
+
     /**
      * @brief Insert a list of params given as parameters in the array
      *
@@ -184,7 +196,8 @@ class sparse_array {
         }
         allocator_t alloc = _data.get_allocator();
         std::allocator_traits<allocator_t>::destroy(alloc, &_data[pos]);
-        std::allocator_traits<allocator_t>::construct(alloc, &_data[pos], std::in_place, std::forward<Params>(args)...);
+        std::allocator_traits<allocator_t>::construct(alloc, &_data[pos], std::in_place,
+                                                      std::forward<Params>(args)...);
         return _data[pos];
     };
 
@@ -214,10 +227,6 @@ class sparse_array {
     };
 
   private:
-    /**
-     * @brief Vector of optional Component
-     *
-     */
     container_t _data;
 };
 };  // namespace ecs
