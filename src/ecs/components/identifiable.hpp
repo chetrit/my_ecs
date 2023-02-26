@@ -2,18 +2,18 @@
 ** EPITECH PROJECT, 2023
 ** workspace
 ** File description:
-** human
+** identifiable
 */
 
-#ifndef HUMAN_HPP_
-#define HUMAN_HPP_
+#ifndef IDENTIFIABLE_HPP_
+#define IDENTIFIABLE_HPP_
 
 #include <sys/types.h>
 
 namespace ecs {
-class human_t {
+class identifiable_t {
   public:
-    human_t(id_t const &id_) : id(id_){};
+    identifiable_t(id_t const &id_) : id(id_){};
 
     operator id_t() { return id; }
 
@@ -23,4 +23,4 @@ class human_t {
 };
 }  // namespace ecs
 
-#endif /* !HUMAN_HPP_ */
+#endif /* !IDENTIFIABLE_HPP_ */
