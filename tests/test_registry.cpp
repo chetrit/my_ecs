@@ -15,6 +15,57 @@
 #include "registry.hpp"
 #include "velocity.hpp"
 
+TEST_CASE("registry spawn multiple entities") {
+    ecs::registry_t r;
+    r.register_components<ecs::pos_t, ecs::velocity_t>();
+
+    ecs::entity_t ent1 = r.spawn_entity();
+    ecs::entity_t ent2 = r.spawn_entity();
+    r.emplace_component<ecs::pos_t>(ent1, 2, 2);
+    r.emplace_component<ecs::pos_t>(ent2, 4, 4);
+    auto &p = r.get_components<ecs::pos_t>();
+
+    CHECK(ent1.id == 0);
+    CHECK(ent1.version == 1);
+    CHECK(p[ent1]->x == 2);
+
+    r.kill_entity(ent1);
+    CHECK(ent2.id == 1);
+    CHECK(ent2.version == 1);
+    CHECK(p[ent2]->x == 4);
+    r.kill_entity(ent2);
+
+    ent1 = r.spawn_entity();
+    r.emplace_component<ecs::pos_t>(ent1, 3, 3);
+    CHECK(ent1.id == 0);
+    CHECK(ent1.version == 2);
+    CHECK(p[ent1]->x == 3);
+    r.kill_entity(ent1);
+}
+
+TEST_CASE("registry reusable entities") {
+    ecs::registry_t r;
+    r.register_components<ecs::pos_t, ecs::velocity_t>();
+
+    ecs::entity_t ent1 = r.spawn_entity();
+    r.emplace_component<ecs::pos_t>(ent1, 2, 2);
+    r.emplace_component<ecs::velocity_t>(ent1, 3, 2);
+
+    ecs::sparse_array<ecs::pos_t> p = r.get_components<ecs::pos_t>();
+    ecs::sparse_array<ecs::velocity_t> v = r.get_components<ecs::velocity_t>();
+    REQUIRE(ent1.id == 0);
+    REQUIRE(ent1.version == 1);
+    REQUIRE(p[ent1]->x == 2);
+    REQUIRE(v[ent1]->vx == 3);
+    r.kill_entity(ent1);
+    ecs::entity_t ent2 = r.spawn_entity();
+    r.emplace_component<ecs::pos_t>(ent2, 4, 4);
+    p = r.get_components<ecs::pos_t>();
+    CHECK(ent2.id == 0);
+    CHECK(p[ent2]->x == 4);
+    CHECK(ent2.version == 2);
+}
+
 TEST_CASE("registry register components at once") {
     ecs::registry_t registry;
     registry.register_components<ecs::pos_t, ecs::velocity_t>();

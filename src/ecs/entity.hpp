@@ -13,17 +13,15 @@
 namespace ecs {
 class entity_t {
   public:
-    explicit entity_t(size_t const& id) : _id(id){};
+    explicit entity_t(size_t const& id_) : id(id_){};
     ~entity_t() = default;
 
-    operator size_t() { return _id; }
+    operator size_t() { return id; }
 
-    operator size_t() const { return _id; }
+    operator size_t() const { return id; }
 
-  private:
-    size_t _id;
-
-    // size_t _version = 0;
+    size_t version = 1;
+    size_t id;
 };
 };  // namespace ecs
 
