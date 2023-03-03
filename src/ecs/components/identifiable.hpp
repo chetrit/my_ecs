@@ -8,8 +8,6 @@
 #ifndef IDENTIFIABLE_HPP_
 #define IDENTIFIABLE_HPP_
 
-#include <sys/types.h>
-
 namespace ecs {
 class identifiable_t {
   public:

@@ -8,8 +8,6 @@
 #ifndef HUMAN_HPP_
 #define HUMAN_HPP_
 
-#include <sys/types.h>
-
 namespace ecs {
 class human_t {
   public:

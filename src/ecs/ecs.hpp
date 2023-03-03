@@ -10,4 +10,8 @@
 
 #include "registry.hpp"
 
+namespace ecs {
+using id_t = unsigned int;
+};
+
 #endif /* !ENGINE_H_ */
