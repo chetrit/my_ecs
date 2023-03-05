@@ -103,7 +103,8 @@ class registry_t {
         for (size_t i = 0; i < _index; ++i) {
             entity_t crt_entity(i);
             if (std::count(_killed_entities.begin(), _killed_entities.end(), crt_entity) > 0) {
-                _killed_entities.erase(_killed_entities.begin() + i);
+                _killed_entities.erase(
+                    std::find(_killed_entities.begin(), _killed_entities.end(), crt_entity));
                 crt_entity.version += 1;
                 return crt_entity;
             }
