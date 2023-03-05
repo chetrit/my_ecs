@@ -89,7 +89,7 @@ You can find all the documentation in the file "doc" :
 cd doc
 ```
 
-See [ECS-scheme.png](doc/ECS%20-%20scheme.png) for the shema of the ecs
+See [ECS-scheme.png](doc/ECS-scheme.png) for the shema of the ecs
 
 ## Features
 
